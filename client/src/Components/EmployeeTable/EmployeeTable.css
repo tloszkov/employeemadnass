@@ -1,3 +1,17 @@
 .EmployeeTable {
   padding: 0.5rem;
 }
+
+.level-col{
+  width: 20%;
+}
+
+.position-col{
+  /* width: 550px; */
+  width: 30%;
+}
+.buttons-col{
+  /* width: 550px; */
+  width: 20%;
+}
+

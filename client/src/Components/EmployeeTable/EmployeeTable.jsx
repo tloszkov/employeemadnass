@@ -1,20 +1,29 @@
 import { Link } from "react-router-dom";
 import "./EmployeeTable.css";
+import FilterBar from "../FilterBar.jsx";
+import SortBar from "../SortBar.jsx";
 
-const EmployeeTable = ({ employees, onDelete }) => (
+
+
+
+const EmployeeTable = ({ employees, onDelete, onSort, onFilter }) => (
   <div className="EmployeeTable">
     <table>
       <thead>
         <tr>
+          <th>Nr</th>
           <th>Name</th>
-          <th>Level</th>
-          <th>Position</th>
-          <th />
+          <th className="level-col">Level</th>
+          <th className="position-col">Position</th>
+          <th className="buttons-col" />
         </tr>
       </thead>
       <tbody>
-        {employees.map((employee) => (
+          <FilterBar onFilter={onFilter}/>
+          <SortBar onSort={onSort}/>
+        {employees.map((employee,index) => (
           <tr key={employee._id}>
+            <td>{index+1}</td>
             <td>{employee.name}</td>
             <td>{employee.level}</td>
             <td>{employee.position}</td>
