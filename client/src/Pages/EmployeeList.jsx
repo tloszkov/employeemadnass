@@ -1,9 +1,17 @@
 import { useEffect, useState } from "react";
 import Loading from "../Components/Loading";
 import EmployeeTable from "../Components/EmployeeTable";
+import { useParams } from "react-router-dom";
 
-const fetchEmployees = () => {
-  return fetch("/api/employees").then((res) => res.json());
+const fetchEmployees = (search) => {
+  console.log("search:", search)
+  if (search===''){
+    return fetch(`/api/employees/`).then((res) => res.json());
+  }else {
+    return fetch(`/api/employees/search/${search}`).then((res) => res.json());
+
+  }
+
 };
 
 const deleteEmployee = (id) => {
@@ -18,6 +26,10 @@ const EmployeeList = () => {
   const [filterBy, setFilterBy] = useState(null);
   const [sortDirection, setSortDirection] = useState(1);
   const [reloadEmployees, setReloadEmployees] = useState(true);
+
+ 
+  const { search } = useParams();
+  // console.log("search:", search)
 
   const handleFilter = (event) =>{
     const filter = event.target.id.split(":");
@@ -93,7 +105,7 @@ const EmployeeList = () => {
   };
 
   useEffect(() => {
-    fetchEmployees()
+    fetchEmployees(search)
       .then((employees) => {
         setLoading(false);
         setEmployees(employees);

@@ -2,6 +2,8 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const EmployeeModel = require("./db/employee.model");
+const equipments = require('./equipmentServer.js');
+
 
 const { MONGO_URL, PORT = 8080 } = process.env;
 
@@ -12,6 +14,7 @@ if (!MONGO_URL) {
 
 const app = express();
 app.use(express.json());
+app.use('/api/equipments/', equipments);
 
 app.get("/api/employees/", async (req, res) => {
   const employees = await EmployeeModel.find().sort({ created: "desc" });
@@ -20,6 +23,12 @@ app.get("/api/employees/", async (req, res) => {
 
 app.get("/api/employees/:id", async (req, res) => {
   const employee = await EmployeeModel.findById(req.params.id);
+  return res.json(employee);
+});
+
+app.get("/api/employees/search/:search", async (req, res) => {
+  const search = req.params.search;
+  const employee = await EmployeeModel.find({"name": { $regex: new RegExp(search)}});
   return res.json(employee);
 });
 

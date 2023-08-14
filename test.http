@@ -1,3 +1,20 @@
+GET http://localhost:8080/api/equipments/
+
+###
+Get http://localhost:8080/api/equipments/64d8826e8d91a88f4485f172
+Content-Type:  application/json
+###
+PATCH http://localhost:8080/api/equipments/64d8826e8d91a88f4485f172
+Content-Type:  application/json
+
+{
+  "name": "Beka",
+  "type": "Power Managment",
+  "amount": "1"
+}
+
+###
+
 GET http://localhost:8080/api/employees/
 
 ###
