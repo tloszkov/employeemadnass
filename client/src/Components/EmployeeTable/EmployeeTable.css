@@ -3,7 +3,7 @@
 }
 
 .level-col{
-  width: 20%;
+  width: 15%;
 }
 
 .position-col{
@@ -22,4 +22,11 @@
   /* width: 550px; */
   width: 50%;
 }
+.pagination{
+  display: flex;
+  text-align: center;
+  
+}
+
+
 

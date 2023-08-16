@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
 import "../../Components/EmployeeTable/EmployeeTable.css";
 import EquipmentFilterBar from "./Components/EquipmentFilterBar";
+import EquipmentPaginationBar from "./Components/EquipmentPaginationBar";
 
-const EquipmentTable = ({ equipments, onDelete, onFilter }) => (
+const EquipmentTable = ({ equipments, onDelete, onFilter, onPage, page }) => (
   <div className="EmployeeTable">
     <table>
       <thead>
@@ -33,6 +34,7 @@ const EquipmentTable = ({ equipments, onDelete, onFilter }) => (
             </td>
           </tr>
         ))}
+        <EquipmentPaginationBar onPage={onPage} pageAmount={page}/>
       </tbody>
     </table>
   </div>

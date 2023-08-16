@@ -4,8 +4,7 @@ import EmployeeTable from "../Components/EmployeeTable";
 import { useParams } from "react-router-dom";
 
 const fetchEmployees = (search) => {
-  console.log("search:", search)
-  if (search===''){
+  if (search===undefined){
     return fetch(`/api/employees/`).then((res) => res.json());
   }else {
     return fetch(`/api/employees/search/${search}`).then((res) => res.json());

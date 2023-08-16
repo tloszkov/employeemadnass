@@ -1,3 +1,6 @@
+GET http://localhost:8080/api/equipments?page=0&count=10
+
+###
 GET http://localhost:8080/api/equipments/
 
 ###

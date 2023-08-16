@@ -19,6 +19,7 @@ function FilterBar({onFilter}) {
               >{position}</button>
             ))}
         </th>
+        <th></th>
         <th>
             <button id ="" onClick={onFilter}>Clear Filter</button>
         </th>

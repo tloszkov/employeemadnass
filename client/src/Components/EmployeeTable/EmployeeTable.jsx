@@ -15,6 +15,7 @@ const EmployeeTable = ({ employees, onDelete, onSort, onFilter }) => (
           <th>Name</th>
           <th className="level-col">Level</th>
           <th className="position-col">Position</th>
+          <th >Equipment</th>
           <th className="buttons-col" />
         </tr>
       </thead>
@@ -28,6 +29,13 @@ const EmployeeTable = ({ employees, onDelete, onSort, onFilter }) => (
             <td>{employee.level}</td>
             <td>{employee.position}</td>
             <td>
+              {employee.equipment.map((equipment,index)=>{
+                return <div>
+                  {index+1}:{equipment.name}</div>
+              })}
+            </td>
+            <td>
+            <input type="checkbox" checked={employee.present}></input>
               <Link to={`/update/${employee._id}`}>
                 <button type="button">Update</button>
               </Link>
