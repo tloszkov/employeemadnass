@@ -1,16 +1,23 @@
 import { useEffect, useState } from "react";
 import Loading from "../Components/Loading";
 import EmployeeTable from "../Components/EmployeeTable";
-import { useParams } from "react-router-dom";
+import { useParams,useLocation } from "react-router-dom";
 
-const fetchEmployees = (search) => {
+const fetchEmployees = (search,location) => {
+  console.log("location:", location)
+
+  if(location==='/top-paid'){
+    return fetch('/api/employees/top-paid').then((res) => res.json());
+  }
+  
+  if(location==='/missing'){
+  }
+
   if (search===undefined){
     return fetch(`/api/employees/`).then((res) => res.json());
   }else {
     return fetch(`/api/employees/search/${search}`).then((res) => res.json());
-
   }
-
 };
 
 const deleteEmployee = (id) => {
@@ -26,9 +33,9 @@ const EmployeeList = () => {
   const [sortDirection, setSortDirection] = useState(1);
   const [reloadEmployees, setReloadEmployees] = useState(true);
 
- 
   const { search } = useParams();
-  // console.log("search:", search)
+  const location = useLocation();
+
 
   const handleFilter = (event) =>{
     const filter = event.target.id.split(":");
@@ -97,14 +104,16 @@ const EmployeeList = () => {
   }
 
   const handleDelete = (id) => {
-    deleteEmployee(id);
-    setEmployees((employees) => {
-      return employees.filter((employee) => employee._id !== id);
-    });
+      // deleteEmployee(id);
+      setEmployees((employees) => {
+        return employees.filter((employee) => employee._id !== id);
+      });
+      setReloadEmployees(prevValue => !prevValue);
+      console.log(reloadEmployees);
   };
 
   useEffect(() => {
-    fetchEmployees(search)
+    fetchEmployees(search,location.pathname)
       .then((employees) => {
         setLoading(false);
         setEmployees(employees);

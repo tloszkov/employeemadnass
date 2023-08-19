@@ -2,31 +2,17 @@
   padding: 0.5rem;
 }
 
-.level-col{
-  width: 15%;
-}
-
-.position-col{
-  /* width: 550px; */
-  width: 30%;
-}
-.buttons-col{
-  /* width: 550px; */
-  width: 20%;
-}
-.amount-col{
-  /* width: 550px; */
-  width: 10%;
-}
-.type-col{
-  /* width: 550px; */
-  width: 50%;
-}
 .pagination{
   display: flex;
   text-align: center;
-  
+}
+.button{
+  font-size: larger;
 }
 
-
-
+.deleteForm{
+  font-weight: bold;
+  border: solid 2px black;
+  border-radius: 10px;
+  width: 400px;
+}

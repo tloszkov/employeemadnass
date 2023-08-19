@@ -7,7 +7,15 @@ const EmployeeSchema = new Schema({
   name: String,
   level: String,
   position: String,
-  present:Boolean,
+  present: Boolean,
+  color: String,
+  startingDate: Date,
+  salary: Number,
+  desiredSalary: Number,
+  favoriteBrand: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "FavoriteBrand"
+  },
   equipment: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: "Equipment"

@@ -7,6 +7,9 @@ const names = require("./names.json");
 const levels = require("./levels.json");
 const positions = require("./positions.json");
 const equipmentID = require("./equipmentID.json");
+const color = require("./colors.json");
+const favoriteBrandID = require("./favoriteBrandID.json");
+
 const EmployeeModel = require("../db/employee.model");
 
 
@@ -19,6 +22,18 @@ if (!mongoUrl) {
 
 const pick = (from) => from[Math.floor(Math.random() * (from.length - 0))];
 const missing = () => Math.round(Math.random())?true:false;
+const salary = () => Math.round(Math.random()*150+100);
+
+function getRandomDate(startDate, endDate) {
+  const timeDiff = endDate.getTime() - startDate.getTime();
+  const randomTime = Math.random() * timeDiff;
+  const randomDate = new Date(startDate.getTime() + randomTime);
+  return randomDate.toLocaleDateString();
+}
+
+const startDate = new Date('2000-01-01');
+const endDate = new Date();
+
 
 const populateEmployees = async () => {
   await EmployeeModel.deleteMany({});
@@ -28,7 +43,13 @@ const populateEmployees = async () => {
     level: pick(levels),
     position: pick(positions),
     present:missing(),
-    equipment:pick(equipmentID)
+    favoriteBrand:pick(favoriteBrandID),
+    equipment:pick(equipmentID),
+    color:pick(color),
+    startingDate: getRandomDate(startDate, endDate),
+    salary:salary(),
+    desiredSalary:salary(),
+
   }));
 
   await EmployeeModel.create(...employees);

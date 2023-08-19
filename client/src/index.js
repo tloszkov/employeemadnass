@@ -15,6 +15,7 @@ import EquipmentUpdater from "./Pages/Equipment/EquipmentUpdater"
 import "./index.css";
 import TableTest from "./Pages/TableTest";
 import FormTest from "./Pages/FormTest";
+import DeleteForm from "./Components/DeleteForm/DeleteForm";
 
 const router = createBrowserRouter([
   {
@@ -61,6 +62,14 @@ const router = createBrowserRouter([
       {
         path: "/missing",
         element: <EmployeeList />,
+      },
+      {
+        path: "/top-paid/",
+        element: <EmployeeList />,
+      },
+      {
+        path: "equipment/delete/:id",
+        element: <DeleteForm />,
       },
     ],
   },

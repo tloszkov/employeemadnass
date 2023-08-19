@@ -6,10 +6,23 @@ const EmployeeForm = ({ onSave, disabled, employee, onCancel }) => {
   const [position, setPosition] = useState(employee?.position ?? "");
   const [present, setPresent] = useState(employee?.present ?? false);
   const [equipment, setEquipment] = useState(employee?.equipment ?? "");
+  const [favoriteBrand, setFavoriteBrand] = useState(employee?.favoriteBrand ?? "");
+  const [color, setColor] = useState(employee?.color ?? "");
+  const [salary, setSalary] = useState(employee?.salary ?? 0);
+  console.log("salary:", salary)
+  const [desiredSalary, setDesiredSalary] = useState(employee?.desiredSalary ?? 0);
+  console.log("desiredSalary:", desiredSalary)
+  const [startingDate, setStartingDate] = useState(employee?.startingDate ?? Date.now());
   const [equipmentList, setEquipmentList] = useState([])
+  const [brandList, setBrandList] = useState([])
 
   const fetchEquipments = () => {
     return fetch("/api/equipments/").then((res) =>{ 
+      return res.json()});
+  };
+
+  const fetchBrands = () => {
+    return fetch("/api/brands/").then((res) =>{ 
       return res.json()});
   };
 
@@ -17,6 +30,10 @@ const EmployeeForm = ({ onSave, disabled, employee, onCancel }) => {
     fetchEquipments()
       .then((equipments) => {
         setEquipmentList(equipments);
+      })
+    fetchBrands()
+      .then((brands) => {
+        setBrandList(brands);
       })
   }, [])
   
@@ -32,7 +49,12 @@ const EmployeeForm = ({ onSave, disabled, employee, onCancel }) => {
         level,
         position,
         present,
-        equipment
+        equipment,
+        favoriteBrand,
+        color,
+        salary,
+        desiredSalary,
+        startingDate
         
       });
     }
@@ -42,7 +64,12 @@ const EmployeeForm = ({ onSave, disabled, employee, onCancel }) => {
       level,
       position,
       present,
-      equipment
+      equipment,
+      favoriteBrand,
+      color,
+      salary,
+      desiredSalary,
+      startingDate,
     });
   };
 
@@ -91,7 +118,55 @@ const EmployeeForm = ({ onSave, disabled, employee, onCancel }) => {
       </div>
 
       <div className="control">
-        
+        <label htmlFor="position">Color:</label>
+        <input
+          type="color"
+          value={color}
+          onChange={(e) => {
+            return setColor(e.target.value)}}
+          name="color"
+          id="color"
+          />
+      </div>
+
+      <div className="control">
+        <label htmlFor="position">Salary:</label>
+        <input
+          type="input"
+          value={salary}
+          onChange={(e) => {
+            return setSalary(e.target.value)}}
+          name="salary"
+          id="salary"
+          />
+      </div>
+
+      <div className="control">
+        <label htmlFor="position">Desired salary:</label>
+        <input
+          type="input"
+          value={desiredSalary}
+          onChange={(e) => {
+            return setDesiredSalary(e.target.value)}}
+          name="desiredSalary"
+          id="desiredSalary"
+          />
+      </div>
+
+      <div className="control">
+        <label htmlFor="position">Starting date:</label>
+        <input
+          type="date"
+          value={startingDate}
+          onChange={(e) => {
+            return setStartingDate(e.target.value)}}
+          name="startingDate"
+          id="startingDate"
+          />
+      </div>
+
+
+      <div className="control">
         <select>
           {equipmentList.map((equipment) => {
              	return <option id={equipment._id} onClick={(e)=>{
@@ -109,13 +184,31 @@ const EmployeeForm = ({ onSave, disabled, employee, onCancel }) => {
           />
       </div>
 
+      <div className="control">
+        <select>
+          {brandList.map((brand) => {
+             	return <option id={brand._id} onClick={(e)=>{
+                    return setFavoriteBrand(e.target.id)}}>
+                    {brand.name}
+                    </option>
+          	})}
+          </select>
+
+        <label htmlFor="brand">Brand:</label>
+        <input
+          value={favoriteBrand}
+          name="brand"
+          id="brand"
+          />
+      </div>
+
 
 
       <div className="buttons">
         <button type="submit" disabled={disabled}>
           {employee ? "Update Employee" : "Create Employee"}
         </button>
-
+        
         <button type="button" onClick={onCancel}>
           Cancel
         </button>

@@ -6,7 +6,7 @@
 use('test');
 
 // Search for documents in the current collection.
-db.getCollection('equipment')
+db.getCollection('employees')
   .find(
     {
       // "name":/Robert/i
@@ -16,6 +16,8 @@ db.getCollection('equipment')
       */
     },
     {
+      // "name":1,
+      // salary:1
       // _id: 1
       /*
       * Projection
@@ -25,10 +27,12 @@ db.getCollection('equipment')
     }
   )
   .sort({
+    "salary":-1
     /*
     * fieldA: 1 // ascending
     * fieldB: -1 // descending
     */
-  }).skip(2).limit(10);
+  }).skip(0).limit(3)
+  // .skip(2).limit(10);
 
 // db.getCollection('equipment').count();

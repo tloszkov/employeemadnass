@@ -1,3 +1,26 @@
+GET http://localhost:8080/api/brands
+
+
+###
+GET http://localhost:8080/api/brands/64df4d800c74cbb1b6edd4af
+
+###
+DELETE http://localhost:8080/api/brands/
+
+###
+PATCH  http://localhost:8080/api/brands/64df4d800c74cbb1b6edd4b0
+Content-Type: application/json
+
+{
+  "name":"HP"
+}
+
+
+###
+GET http://localhost:8080/api/equipments?sortBy=amount&sortDirection=1&page=2&count=10
+
+
+###
 GET http://localhost:8080/api/equipments?page=0&count=10
 
 ###
@@ -18,6 +41,9 @@ Content-Type:  application/json
 
 ###
 
+GET http://localhost:8080/api/employees/top-paid
+###
+
 GET http://localhost:8080/api/employees/
 
 ###
@@ -31,7 +57,7 @@ Content-Type: application/json
 }
 
 ###
-DELETE http://localhost:8080/api/employees/63fc6e4bca1cb463caa21779
+DELETE http://localhost:8080/api/employees/64df7f564a519b34cf2b0291
 
 ###
 PATCH http://localhost:8080/api/employees/63fc6e4bca1cb463caa21779

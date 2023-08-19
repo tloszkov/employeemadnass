@@ -14,15 +14,17 @@ const deleteEquipment = (id) => {
   );
 };
 
-
 const EquipmentList = () => {
   const [loading, setLoading] = useState(true);
   const [equipments, setEquipments] = useState(null);
   const [filterBy, setFilterBy] = useState(null);
 //   const [sortDirection, setSortDirection] = useState(1);
   const [reloadEquipments, setReloadEquipments] = useState(true);
-  const [page, setPage] = useState(1)
-  const [url, setUrl] = useState("/api/equipments?page=0&count=10")
+  const [page, setPage] = useState(0)
+  const [maxPage, setMaxPage] = useState(0)
+  const [url, setUrl] = useState("/api/equipments?page=0&count=10&sortBy=name&sortDirection=1");
+  const [sortDirection, setSortDirection] = useState(1)
+  const [sortBy, setSortBy] = useState("name")
 
   const handleFilter = (event) =>{
     const filter = event.target.id.split(":");
@@ -47,8 +49,15 @@ const EquipmentList = () => {
     });
   };
 
-  const handlePage = (page) =>{
-    setUrl(`/api/equipments?page=${page*10}&count=10`);
+  const handlePage = (page) => {
+    setPage(page);
+    setUrl(`/api/equipments?sortBy=${sortBy}&sortDirection=${sortDirection}&page=${page}&count=10`);
+  }
+  
+  const handleSort = (id) => {
+    setSortBy(id.target.id);
+    setSortDirection(prevValue =>-prevValue);
+    setUrl(`/api/equipments?sortBy=${sortBy}&sortDirection=${sortDirection}&page=${page}&count=10`);
   }
 
   useEffect(() => {
@@ -56,15 +65,15 @@ const EquipmentList = () => {
       .then((equipments) => {
         setLoading(false);
         setEquipments(equipments.equipment);
-        setPage(equipments.resultCount);
+        setMaxPage(equipments.resultCount);
       })
-  }, [reloadEquipments,url]);
+  }, [reloadEquipments,url,sortDirection,sortBy,page]);
 
   if (loading) {
     return <Loading />;
   }
 
-  return <EquipmentTable equipments={equipments} onDelete={handleDelete} onFilter={handleFilter} onPage={handlePage} page={page}/>;
+  return <EquipmentTable equipments={equipments} onDelete={handleDelete} onFilter={handleFilter} onPage={handlePage} page={maxPage} onSort={handleSort}/>;
 };
 
 export default EquipmentList;

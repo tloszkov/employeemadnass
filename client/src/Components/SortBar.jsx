@@ -24,6 +24,12 @@ function SortBar({onSort}) {
               >Position</button>
         </th>
         <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
         <th>
             {/* <button id="" onClick={onSort}
             >Clear Sort</button> */}

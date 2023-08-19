@@ -1,17 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const EquipmentModel = require("./db/equipment.model");
-const { parse } = require('dotenv');
-
-
-// router.use((req,res,next)=>{
-//   console.log('You are on equipment router. (for the errors check the server/equipmentServer.js');  
-//   next();
-// });
 
 router.get('/', async(req,res)=>{
 
-  const {count,page} = req.query;
+  const {count,page,sortBy,sortDirection} = req.query;
 
   if (page === undefined||count===undefined){
     const equipment = await EquipmentModel.find();
@@ -31,13 +24,13 @@ router.get('/', async(req,res)=>{
   
   if (countInt<0 || pageInt<0)
     return res.status(400).send({error:"Query parameters connot contain negativ value!"});
-
   const resultCount = await EquipmentModel.count();
-  const equipment = await EquipmentModel.find().skip(pageInt).limit(countInt);
+
+  const equipment = await EquipmentModel.find({}).sort({[`${sortBy}`]:sortDirection}).skip(pageInt*10).limit(10);
   
   return res.send({equipment,resultCount})
   });
-  
+
 router.get('/:id', async (req, res, next) => {
   console.log("req:", req.params.id);
     const equipment = await EquipmentModel.findById(req.params.id);
@@ -68,7 +61,6 @@ router.delete('/:id', async (req, res, next) => {
 
 router.patch('/:id', async (req, res, next) => {
   try {
-    console.log("patch ag!");
     const equipment = await EquipmentModel.findOneAndUpdate(
       { _id: req.params.id },
       { $set: { ...req.body } },

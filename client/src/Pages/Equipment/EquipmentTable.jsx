@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
 import "../../Components/EmployeeTable/EmployeeTable.css";
 import EquipmentFilterBar from "./Components/EquipmentFilterBar";
+import EquipmentSortBar from "./Components/EquipmentSortBar";
 import EquipmentPaginationBar from "./Components/EquipmentPaginationBar";
 
-const EquipmentTable = ({ equipments, onDelete, onFilter, onPage, page }) => (
+const EquipmentTable = ({ equipments, onDelete, onFilter, onPage, page, onSort }) => (
   <div className="EmployeeTable">
     <table>
       <thead>
@@ -17,7 +18,7 @@ const EquipmentTable = ({ equipments, onDelete, onFilter, onPage, page }) => (
       </thead>
       <tbody>
           <EquipmentFilterBar onFilter={onFilter}/>
-          {/* <SortBar onSort={onSort}/> */}
+          <EquipmentSortBar onSort={onSort}/>
         {equipments.map((equipment,index) => (
           <tr key={equipment._id}>
             <td>{index+1}</td>
@@ -28,9 +29,9 @@ const EquipmentTable = ({ equipments, onDelete, onFilter, onPage, page }) => (
               <Link to={`/equipment/update/${equipment._id}`}>
                 <button type="button">Update</button>
               </Link>
-              <button type="button" onClick={() => onDelete(equipment._id)}>
-                Delete
-              </button>
+              <Link to={`/equipment/delete/${equipment._id}`}>
+                <button type="button">Delete</button>
+              </Link>
             </td>
           </tr>
         ))}

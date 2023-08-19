@@ -15,7 +15,13 @@ const EmployeeTable = ({ employees, onDelete, onSort, onFilter }) => (
           <th>Name</th>
           <th className="level-col">Level</th>
           <th className="position-col">Position</th>
+          <th >Favorite brand</th>
           <th >Equipment</th>
+          <th >Color</th>
+          <th >Salary</th>
+          <th >Desired salary</th>
+          <th >Starting Date</th>
+
           <th className="buttons-col" />
         </tr>
       </thead>
@@ -28,20 +34,25 @@ const EmployeeTable = ({ employees, onDelete, onSort, onFilter }) => (
             <td>{employee.name}</td>
             <td>{employee.level}</td>
             <td>{employee.position}</td>
+            <td>{employee.favoriteBrand.name}</td>
             <td>
               {employee.equipment.map((equipment,index)=>{
                 return <div>
-                  {index+1}:{equipment.name}</div>
+                  {equipment.name}</div>
               })}
             </td>
-            <td>
+            <td style={{backgroundColor:employee.color}}></td>
+            <td>{employee.salary}</td>
+            <td>{employee.desiredSalary}</td>
+            <td>{new Date(employee.startingDate).toDateString()}</td>
             <input type="checkbox" checked={employee.present}></input>
+            <td>
               <Link to={`/update/${employee._id}`}>
                 <button type="button">Update</button>
               </Link>
-              <button type="button" onClick={() => onDelete(employee._id)}>
-                Delete
-              </button>
+              <Link to={`/equipment/delete/${employee._id}`}>
+                <button id={employee._id} type="button" onDelete={onDelete}>Delete</button>
+              </Link>
             </td>
           </tr>
         ))}
