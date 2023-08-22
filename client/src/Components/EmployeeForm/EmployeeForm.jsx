@@ -9,15 +9,22 @@ const EmployeeForm = ({ onSave, disabled, employee, onCancel }) => {
   const [favoriteBrand, setFavoriteBrand] = useState(employee?.favoriteBrand ?? "");
   const [color, setColor] = useState(employee?.color ?? "");
   const [salary, setSalary] = useState(employee?.salary ?? 0);
-  console.log("salary:", salary)
   const [desiredSalary, setDesiredSalary] = useState(employee?.desiredSalary ?? 0);
-  console.log("desiredSalary:", desiredSalary)
   const [startingDate, setStartingDate] = useState(employee?.startingDate ?? Date.now());
   const [equipmentList, setEquipmentList] = useState([])
   const [brandList, setBrandList] = useState([])
+  const [companyList, setCompanyList] = useState([])
+  const [company, setCompany] = useState(null)
+  
+  console.log(companyList);
 
   const fetchEquipments = () => {
     return fetch("/api/equipments/").then((res) =>{ 
+      return res.json()});
+  };
+
+  const fetchCompanies = () => {
+    return fetch("/api/companies/").then((res) =>{ 
       return res.json()});
   };
 
@@ -26,16 +33,27 @@ const EmployeeForm = ({ onSave, disabled, employee, onCancel }) => {
       return res.json()});
   };
 
-  useEffect(() => {
-    fetchEquipments()
-      .then((equipments) => {
-        setEquipmentList(equipments);
-      })
-    fetchBrands()
-      .then((brands) => {
-        setBrandList(brands);
-      })
-  }, [])
+ useEffect(() => {
+  // Define an array of Promises
+  const promises = [
+    fetchEquipments(),
+    fetchBrands(),
+    fetchCompanies()
+  ];
+
+  // Use Promise.all to wait for all Promises to resolve
+  Promise.all(promises)
+    .then(([equipments, brands, companies]) => {
+      // Update state with the fetched data
+      setEquipmentList(equipments);
+      setBrandList(brands);
+      setCompanyList(companies);
+    })
+    .catch((error) => {
+      // Handle errors here if any of the Promises reject
+      console.error("Error fetching data:", error);
+    });
+}, []);
   
 
   const onSubmit = (e) => {
@@ -54,7 +72,8 @@ const EmployeeForm = ({ onSave, disabled, employee, onCancel }) => {
         color,
         salary,
         desiredSalary,
-        startingDate
+        startingDate,
+        company
         
       });
     }
@@ -70,6 +89,7 @@ const EmployeeForm = ({ onSave, disabled, employee, onCancel }) => {
       salary,
       desiredSalary,
       startingDate,
+      company
     });
   };
 
@@ -141,6 +161,21 @@ const EmployeeForm = ({ onSave, disabled, employee, onCancel }) => {
           />
       </div>
 
+      
+      <div className="control">
+         <label htmlFor="brand">Companies:</label>
+         <select>
+            {companyList.map((company)=><option id={company._id} onClick={(e)=> setCompany(e.target.id)}>
+              {company.name}</option>)}  
+         </select>
+         <input
+          value={company}
+          name="company"
+          id="company"
+          />
+       
+      </div>
+
       <div className="control">
         <label htmlFor="position">Desired salary:</label>
         <input
@@ -201,6 +236,7 @@ const EmployeeForm = ({ onSave, disabled, employee, onCancel }) => {
           id="brand"
           />
       </div>
+
 
 
 

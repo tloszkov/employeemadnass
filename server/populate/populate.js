@@ -9,6 +9,8 @@ const positions = require("./positions.json");
 const equipmentID = require("./equipmentID.json");
 const color = require("./colors.json");
 const favoriteBrandID = require("./favoriteBrandID.json");
+const gamesID = require("./gamesID.json");
+const companiesID = require("./comaniesID.json");
 
 const EmployeeModel = require("../db/employee.model");
 
@@ -49,7 +51,8 @@ const populateEmployees = async () => {
     startingDate: getRandomDate(startDate, endDate),
     salary:salary(),
     desiredSalary:salary(),
-
+    favoriteGames:pick(gamesID),
+    employeeCompany:pick(companiesID)
   }));
 
   await EmployeeModel.create(...employees);

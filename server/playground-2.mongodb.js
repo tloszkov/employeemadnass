@@ -6,9 +6,14 @@
 use('test');
 
 // Search for documents in the current collection.
-db.getCollection('employees')
+db.getCollection('companies')
   .find(
     {
+      // $expr: { $gt: [{$toDouble: "$salary"}, {$toDouble: "$desiredSalary"}] }
+      // { $expr: { $gt: [{$toDouble: "$salary"}, {$toDouble: "$desiredSalary"}] } }, 
+      // { $expr: { $lt: [{$toDouble: "$salary"}, {$toDouble: "$desiredSalary"}] } }, 
+      // { $expr: { $gte: [{$toDouble: "$salary"}, {$toDouble: "$desiredSalary"}] } }, 
+      // { $expr: { $lte: [{$toDouble: "$salary"}, {$toDouble: "$desiredSalary"}] } }  
       // "name":/Robert/i
       /*
       * Filter
@@ -16,8 +21,10 @@ db.getCollection('employees')
       */
     },
     {
-      // "name":1,
-      // salary:1
+      "name":1,
+      // salary:1,
+      // desiredSalary:1
+
       // _id: 1
       /*
       * Projection
@@ -27,12 +34,13 @@ db.getCollection('employees')
     }
   )
   .sort({
-    "salary":-1
+    // "salary":-1
     /*
     * fieldA: 1 // ascending
     * fieldB: -1 // descending
     */
-  }).skip(0).limit(3)
+  })
   // .skip(2).limit(10);
+  //limit(3)
 
 // db.getCollection('equipment').count();

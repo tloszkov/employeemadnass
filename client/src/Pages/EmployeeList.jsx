@@ -11,6 +11,7 @@ const fetchEmployees = (search,location) => {
   }
   
   if(location==='/missing'){
+    return fetch(`/api/employees/missing`).then((res) => res.json());
   }
 
   if (search===undefined){
@@ -104,12 +105,10 @@ const EmployeeList = () => {
   }
 
   const handleDelete = (id) => {
-      // deleteEmployee(id);
       setEmployees((employees) => {
         return employees.filter((employee) => employee._id !== id);
       });
       setReloadEmployees(prevValue => !prevValue);
-      console.log(reloadEmployees);
   };
 
   useEffect(() => {

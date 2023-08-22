@@ -11,11 +11,14 @@ import EmployeeUpdater from "./Pages/EmployeeUpdater";
 import EquipmentList from "./Pages/Equipment/EquipmentList"
 import EquipmentCreator from "./Pages/Equipment/EquipmentCreator"
 import EquipmentUpdater from "./Pages/Equipment/EquipmentUpdater"
+import KittensForm from "./Pages/Kittens/KittensForm"
+
 
 import "./index.css";
 import TableTest from "./Pages/TableTest";
 import FormTest from "./Pages/FormTest";
 import DeleteForm from "./Components/DeleteForm/DeleteForm";
+import CreateCompany from "./Pages/Companies/CreateCompany";
 
 const router = createBrowserRouter([
   {
@@ -70,6 +73,14 @@ const router = createBrowserRouter([
       {
         path: "equipment/delete/:id",
         element: <DeleteForm />,
+      },
+      {
+        path: "kittens/:employeeId",
+        element: <KittensForm />,
+      },
+      {
+        path: "create-company",
+        element: <CreateCompany />,
       },
     ],
   },

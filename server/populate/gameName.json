@@ -1,0 +1,55 @@
+[
+    {
+        "name": "Monopoly",
+        "maxPlayers": 8
+    },
+    {
+        "name": "Chess",
+        "maxPlayers": 2
+    },
+    {
+        "name": "Go",
+        "maxPlayers": 2
+    },
+    {
+        "name": "Settlers of Catan",
+        "maxPlayers": 4
+    },
+    {
+        "name": "Dominion",
+        "maxPlayers": 4
+    },
+      {
+        "name": "Splendor",
+        "maxPlayers": 4
+      },
+      {
+        "name": "Carcassonne",
+        "maxPlayers": 5
+      },
+      {
+        "name": "Yahtzee",
+        "maxPlayers": 6
+      },
+      {
+        "name": "Boggle",
+        "maxPlayers": 6
+      },
+      {
+        "name": "The Resistance",
+        "maxPlayers": 10
+      },
+      {
+        "name": "Codenames",
+        "maxPlayers": 8
+      },
+      {
+        "name": "Azul",
+        "maxPlayers": 4
+      },
+      {
+        "name": "Exploding Kittens",
+        "maxPlayers": 5
+      }
+        
+]

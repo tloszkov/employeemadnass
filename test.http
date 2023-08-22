@@ -1,3 +1,38 @@
+GET http://localhost:8080/api/companies/
+
+###
+POST http://localhost:8080/api/companies/
+Content-Type: application/json
+
+{
+  "name":"Dell"
+}
+
+###
+
+GET http://localhost:8080/api/games/64e203ab5525cbdcc4a7966c
+
+
+###
+GET http://localhost:8080/api/kittens/64e203ab5525cbdcc4a7966c
+###
+DELETE http://localhost:8080/api/kittens/64e203ab5525cbdcc4a7966c/hj
+###
+DELETE http://localhost:8080/api/kittens/64e203ab5525cbdcc4a7966c/64e323827b6a34d15a9ec64b
+
+
+###
+POST http://localhost:8080/api/kittens/64e203ab5525cbdcc4a7966c HTTP/1.1
+Content-Type: application/json
+
+{
+  "name":"Cica",
+  "weight":12
+}
+
+
+
+###
 GET http://localhost:8080/api/brands
 
 

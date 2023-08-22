@@ -47,6 +47,11 @@ const EmployeeTable = ({ employees, onDelete, onSort, onFilter }) => (
             <td>{new Date(employee.startingDate).toDateString()}</td>
             <input type="checkbox" checked={employee.present}></input>
             <td>
+              <Link to={`/kittens/${employee._id}`}>
+                <button>Kittens</button>
+              </Link>
+            </td>
+            <td>
               <Link to={`/update/${employee._id}`}>
                 <button type="button">Update</button>
               </Link>

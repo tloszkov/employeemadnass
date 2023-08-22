@@ -12,6 +12,20 @@ const EmployeeSchema = new Schema({
   startingDate: Date,
   salary: Number,
   desiredSalary: Number,
+  employeeCompany: {
+    type:mongoose.Schema.Types.ObjectId,
+    ref:"Company"
+  },
+  favoriteGames:[
+    {
+      type:mongoose.Schema.Types.ObjectId,
+      ref:"Game"
+    }
+  ],
+  kittens:[{
+    name:String,
+    weight:Number
+  }],
   favoriteBrand: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "FavoriteBrand"

@@ -3,8 +3,12 @@ const express = require("express");
 const mongoose = require("mongoose");
 const EmployeeModel = require("./db/employee.model");
 
+
 const equipments = require('./equipmentServer.js');
 const brands = require('./brandServer.js');
+const kittens = require('./kittenServer.js');
+const games = require('./gamesServer');
+const companies = require('./companyServer');
 
 const { MONGO_URL, PORT = 8080 } = process.env;
 
@@ -17,6 +21,9 @@ const app = express();
 app.use(express.json());
 app.use('/api/equipments/', equipments);
 app.use('/api/brands/', brands);
+app.use('/api/kittens/', kittens);
+app.use('/api/games/', games);
+app.use('/api/companies/', companies);
 
 
 app.get("/api/employees/", async (req, res) => {

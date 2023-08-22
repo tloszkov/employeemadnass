@@ -8,6 +8,7 @@
     "populate": "node ./populate/populate.js",
     "populateEquipment": "node ./populate/populateEquipment",
     "populateFavoriteBrand": "node ./populate/populateFavoriteBrand",
+    "populateGame": "node ./populate/populateGame",
 
     "format": "prettier -w ."
   },
